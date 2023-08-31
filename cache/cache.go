@@ -4,9 +4,9 @@ import (
 	"context"
 	"sync/atomic"
 
-	"github.com/Pacific73/gorm-cache/config"
-	"github.com/Pacific73/gorm-cache/data_layer"
-	"github.com/Pacific73/gorm-cache/util"
+	"github.com/charlieTP/gorm-cache/config"
+	"github.com/charlieTP/gorm-cache/data_layer"
+	"github.com/charlieTP/gorm-cache/util"
 	"gorm.io/gorm"
 )
 
@@ -175,4 +175,12 @@ func (c *Gorm2Cache) BatchGetPrimaryCache(ctx context.Context, tableName string,
 		cacheKeys = append(cacheKeys, util.GenPrimaryCacheKey(c.InstanceId, tableName, primaryKey))
 	}
 	return c.cache.BatchGetValues(ctx, cacheKeys)
+}
+
+func (c *Gorm2Cache) SetTTL(ttl int64) {
+	c.cache.SetTTL(ttl)
+}
+
+func (c *Gorm2Cache) GetTTL() int64 {
+	return c.cache.GetTTL()
 }

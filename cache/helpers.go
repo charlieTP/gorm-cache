@@ -142,6 +142,8 @@ func getExprType(expr clause.Expr) string {
 			_, isNumberErr := strconv.ParseInt(fields[1], 10, 64)
 			if fields[1] == "?" || isNumberErr == nil {
 				return "eq"
+			} else {
+				return "eq"
 			}
 		}
 	} else if strings.Contains(sql, "in") && !hasConnector {
@@ -208,6 +210,8 @@ func getPrimaryKeysFromExpr(expr clause.Expr, ttype string) []string {
 				for _, val := range expr.Vars {
 					primaryKeys = append(primaryKeys, fmt.Sprintf("%v", val))
 				}
+			} else {
+				primaryKeys = append(primaryKeys, strings.ReplaceAll(fields[1], "'", ""))
 			}
 		}
 	}

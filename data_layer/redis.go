@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/Pacific73/gorm-cache/config"
-	"github.com/Pacific73/gorm-cache/util"
+	"github.com/charlieTP/gorm-cache/config"
+	"github.com/charlieTP/gorm-cache/util"
 	"github.com/go-redis/redis/v8"
 )
 
@@ -155,4 +155,12 @@ func (r *RedisLayer) BatchSetKeys(ctx context.Context, kvs []util.Kv) error {
 
 func (r *RedisLayer) SetKey(ctx context.Context, kv util.Kv) error {
 	return r.client.Set(ctx, kv.Key, kv.Value, time.Duration(util.RandFloatingInt64(r.ttl))*time.Millisecond).Err()
+}
+
+func (r *RedisLayer) SetTTL(ttl int64) {
+	r.ttl = ttl
+}
+
+func (r *RedisLayer) GetTTL() int64 {
+	return r.ttl
 }

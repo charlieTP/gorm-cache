@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/Pacific73/gorm-cache/config"
-	"github.com/Pacific73/gorm-cache/util"
+	"github.com/charlieTP/gorm-cache/config"
+	"github.com/charlieTP/gorm-cache/util"
 	"github.com/karlseguin/ccache/v2"
 )
 
@@ -99,4 +99,11 @@ func (m *MemoryLayer) SetKey(ctx context.Context, kv util.Kv) error {
 		m.cache.Set(kv.Key, kv.Value, time.Duration(util.RandFloatingInt64(24))*time.Hour)
 	}
 	return nil
+}
+
+func (m *MemoryLayer) SetTTL(ttl int64) {
+}
+
+func (m *MemoryLayer) GetTTL() int64 {
+	return 0
 }
