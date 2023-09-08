@@ -166,5 +166,9 @@ func (r *RedisLayer) GetTTL() int64 {
 }
 
 func (r *RedisLayer) GetPrimaryCacheTTLByKey(ctx context.Context, primaryKey string) float64 {
-	return r.client.PTTL(ctx, primaryKey).Val().Seconds()
+	duration := r.client.PTTL(ctx, primaryKey).Val()
+	if duration < 0 {
+		return float64(duration.Nanoseconds())
+	}
+	return duration.Seconds()
 }
