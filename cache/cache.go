@@ -184,3 +184,7 @@ func (c *Gorm2Cache) SetTTL(ttl int64) {
 func (c *Gorm2Cache) GetTTL() int64 {
 	return c.cache.GetTTL()
 }
+
+func (c *Gorm2Cache) GetPrimaryCacheTTLByKey(ctx context.Context, tableName string, primaryKey string) float64 {
+	return c.cache.GetPrimaryCacheTTLByKey(ctx, util.GenPrimaryCacheKey(c.InstanceId, tableName, primaryKey))
+}

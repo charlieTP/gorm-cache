@@ -107,3 +107,7 @@ func (m *MemoryLayer) SetTTL(ttl int64) {
 func (m *MemoryLayer) GetTTL() int64 {
 	return 0
 }
+
+func (m *MemoryLayer) GetPrimaryCacheTTLByKey(ctx context.Context, primaryKey string) float64 {
+	return 0
+}

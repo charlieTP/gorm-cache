@@ -26,4 +26,5 @@ type DataLayerInterface interface {
 
 	SetTTL(ttl int64)
 	GetTTL() int64
+	GetPrimaryCacheTTLByKey(ctx context.Context, primaryKey string) float64
 }

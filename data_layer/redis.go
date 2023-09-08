@@ -164,3 +164,7 @@ func (r *RedisLayer) SetTTL(ttl int64) {
 func (r *RedisLayer) GetTTL() int64 {
 	return r.ttl
 }
+
+func (r *RedisLayer) GetPrimaryCacheTTLByKey(ctx context.Context, primaryKey string) float64 {
+	return r.client.PTTL(ctx, primaryKey).Val().Seconds()
+}
